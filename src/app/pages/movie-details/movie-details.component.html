@@ -1,0 +1,11 @@
+<div class="bg-[#050a30] h-screen text-white">
+  <div class="container mx-auto max-w-5xl p-4 flex flex-col">
+    <ng-container *ngIf="isLoading"> loading.... </ng-container>
+
+    <ng-container *ngIf="!isLoading && movieDetails">
+      <h1 class="text-2xl font-extralight from-stone-300">
+        {{ movieDetails.title }}
+      </h1>
+    </ng-container>
+  </div>
+</div>

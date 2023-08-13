@@ -1,0 +1,40 @@
+<a [routerLink]="['/movie-details', movie?.id]">
+  <mat-card
+    *ngIf="movie"
+    class="w-40 group relative"
+    #tooltip="matTooltip"
+    [matTooltip]="movie.overview"
+    matTooltipPosition="right"
+    style="border-radius: 10px"
+    [ngClass]="{ 'w-60': numOfCols === 4 }"
+  >
+    <!-- <div
+    class="justify-center w-full group-hover:flex items-center bg-black bg-opacity-50 absolute inset-0"
+  >
+    <p class="text-lg text-red-600">hello</p>
+  </div> -->
+    <div class="flex flex-col">
+      <img
+        mat-card-image
+        [src]="baseImagePath + movie.poster_path"
+        alt="image"
+        class="mx-auto h-[260px] w-full"
+        style="border-top-left-radius: 5px; border-top-right-radius: 5px"
+      />
+      <div class="flex justify-between w-full p-1 items-center">
+        <div class="w-3/4">
+          <mat-card-subtitle class="truncate hover:whitespace-normal">
+            <span class="text-[.5rem]">
+              {{ movie.title }}
+            </span>
+          </mat-card-subtitle>
+        </div>
+        <div>
+          <span class="text-[.65rem] font-medium">{{
+            movie.release_date.toString().substring(0, 4)
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</a>

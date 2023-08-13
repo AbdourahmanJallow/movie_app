@@ -1,0 +1,45 @@
+<mat-drawer-container
+  class="min-h-full max-w-full"
+  style="background-color: #050a30; color: #fff"
+  *ngIf="isLoading"
+>
+  <ngx-skeleton-loader count="1" appearance="circle"></ngx-skeleton-loader>
+</mat-drawer-container>
+<mat-drawer-container
+  [autosize]="true"
+  class="min-h-full max-w-full"
+  style="background-color: #050a30"
+  *ngIf="!isLoading && movies"
+>
+  <mat-drawer
+    mode="side"
+    opened
+    class="p-4"
+    style="
+      background-color: #050a30;
+      border-right: 1px solid #7ec8e3;
+      color: white;
+    "
+  >
+    <app-categories></app-categories>
+  </mat-drawer>
+
+  <mat-drawer-content class="p-4">
+    <app-movies-header
+      (sortChange)="onSortChange($event)"
+      (itemsShowCount)="onItemsShowChange($event)"
+      (updateColumns)="onUpdateColumns($event)"
+    ></app-movies-header>
+
+    <mat-grid-list
+      [gutterSize]="gutterSize"
+      [cols]="columns"
+      [rowHeight]="rowHeight"
+      *ngIf="!isLoading && movies"
+    >
+      <mat-grid-tile *ngFor="let movie of movies">
+        <app-movie-card [movie]="movie" [numOfCols]="columns"> </app-movie-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-drawer-content>
+</mat-drawer-container>
