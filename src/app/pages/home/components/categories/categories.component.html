@@ -1,13 +1,25 @@
-<mat-expansion-panel>
-  <mat-expansion-panel-header>
+<ng-container>
+  <!-- <mat-expansion-panel-header>
     <mat-panel-title>Categories</mat-panel-title>
-  </mat-expansion-panel-header>
+  </mat-expansion-panel-header> -->
 
-  <mat-selection-list [multiple]="false">
+  <!-- <mat-selection-list [multiple]="false">
     <mat-list-option>
       <button>
-        <!-- {{ category }} -->
+        {{ category }}
       </button>
     </mat-list-option>
-  </mat-selection-list>
-</mat-expansion-panel>
+  </mat-selection-list> -->
+
+  <div class="p-1 text-white">
+    <h3 class="font-semibold text-start">Categories</h3>
+
+    <div class="flex flex-col justify-center items-start">
+      <ng-container *ngFor="let category of genres">
+        <button mat-button class="text-white mt-2">
+          {{ category.name }}
+        </button>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

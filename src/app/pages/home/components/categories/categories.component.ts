@@ -11,15 +11,16 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   constructor(private moviesService: MoviesService) {}
 
   public genres: Array<GenreItem> | undefined;
-  categories: Array<string> | undefined;
+  // categories: Array<string> | undefined;
   public categoriesSubscription: Subscription | undefined;
 
   ngOnInit(): void {
-    // this.categoriesSubscription = this.moviesService
-    //   .getAllGenres()
-    //   .subscribe((_categories) => (this.genres = _categories?.genres.map(genre=> {
-    //     this.categories.push(genre);
-    //   })));
+    this.categoriesSubscription = this.moviesService
+      .getAllGenres()
+      .subscribe((response) => {
+        console.log(response);
+        this.genres = response.genres;
+      });
   }
 
   ngOnDestroy(): void {

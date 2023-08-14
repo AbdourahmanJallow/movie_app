@@ -12,16 +12,6 @@ import { environment } from 'src/environments/environment.development';
 const apiUrl = 'https://api.themoviedb.org/3';
 const apiKey = '';
 
-// const headers = new Headers({
-//   Authorization: authorizationHeader,
-// });
-
-// const requestOptions = {
-//   observe: 'response',
-//   headers: headers,
-//   responseType: 'json',
-// };
-
 @Injectable({
   providedIn: 'root',
 })
@@ -55,5 +45,11 @@ export class MoviesService {
     return this.http.get<MovieDetails>(
       `${apiUrl}/movie/${movie_id}?api_key=${apiKey}`
     );
+  }
+
+  getSimilarMovies(movie_id: any): Observable<TrendingMovies> {
+    return this.http
+      .get<TrendingMovies>(`${apiUrl}/movie/${movie_id}/similar?api_key=${apiKey}
+`);
   }
 }

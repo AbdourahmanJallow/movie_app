@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RatingModule } from 'ngx-bootstrap/rating';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,6 +60,7 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
     MatTooltipModule,
     HttpClientModule,
     NgxSkeletonLoaderModule,
+    RatingModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

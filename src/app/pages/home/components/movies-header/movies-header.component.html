@@ -1,7 +1,11 @@
-<mat-card class="mb-4 p-3" color="primary" style="background-color: #7ec8e3">
+<mat-card
+  class="mb-4 p-3"
+  color="primary"
+  style="background-color: #001f3d; color: white"
+>
   <div class="flex justify-between">
     <div>
-      <button mat-button [matMenuTriggerFor]="menu">
+      <button mat-button [matMenuTriggerFor]="menu" style="color: white">
         Filter by {{ movieType === "top_rated" ? "top rated" : movieType }}
         <mat-icon>expand_more</mat-icon>
       </button>
