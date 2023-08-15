@@ -7,10 +7,10 @@ import {
   NowPlayingOrUpcoming,
 } from '../models/movies.model';
 import { MovieDetails } from 'src/app/models/movieDetails.model';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
-const apiUrl = 'https://api.themoviedb.org/3';
-const apiKey = '';
+const apiUrl = environment.BASE_API_URL;
+const apiKey = environment.API_KEY;
 
 @Injectable({
   providedIn: 'root',
