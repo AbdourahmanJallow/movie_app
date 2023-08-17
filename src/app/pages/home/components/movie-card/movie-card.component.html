@@ -1,7 +1,7 @@
-<a [routerLink]="['/movie-details', movie?.id]">
+<button [routerLink]="['/movie-details', movie?.id]">
   <mat-card
     *ngIf="movie"
-    class="w-40 group relative"
+    class="w-44 group relative"
     #tooltip="matTooltip"
     [matTooltip]="movie.overview"
     matTooltipPosition="right"
@@ -16,20 +16,22 @@
         class="mx-auto h-[260px] w-full"
         style="border-top-left-radius: 5px; border-top-right-radius: 5px"
       />
-      <div class="flex justify-between w-full p-1 items-center">
-        <div class="w-3/4">
-          <mat-card-subtitle class="truncate hover:whitespace-normal">
-            <span class="text-[.5rem]">
-              {{ movie.title }}
-            </span>
-          </mat-card-subtitle>
+      <div
+        class="flex justify-between w-full py-2 px-1 items-center bg-[#001f3d] text-[#fff] rounded-b-md"
+      >
+        <div
+          class="max-w-[3/4] text-[.65rem] text-[#fff] truncate hover:whitespace-normal"
+        >
+          <span class="text-left">
+            {{ movie.title }}
+          </span>
         </div>
         <div>
-          <span class="text-[.65rem] font-medium">{{
+          <span class="font-light">{{
             movie.release_date.toString().substring(0, 4)
           }}</span>
         </div>
       </div>
     </div>
   </mat-card>
-</a>
+</button>

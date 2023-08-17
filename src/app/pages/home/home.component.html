@@ -14,7 +14,7 @@
   <mat-drawer
     mode="side"
     opened
-    class="p-4"
+    class="p-4 h-screen"
     style="
       background-color: #050a30;
       border-right: 1px solid #001f3d;
@@ -24,7 +24,7 @@
     <app-categories></app-categories>
   </mat-drawer>
 
-  <mat-drawer-content class="p-4">
+  <mat-drawer-content class="p-4 h-screen overflow-y-auto">
     <app-movies-header
       (sortChange)="onSortChange($event)"
       (itemsShowCount)="onItemsShowChange($event)"
@@ -36,6 +36,7 @@
       [cols]="columns"
       [rowHeight]="rowHeight"
       *ngIf="!isLoading && movies"
+      class="overflow-y-hidden"
     >
       <mat-grid-tile *ngFor="let movie of movies">
         <app-movie-card [movie]="movie" [numOfCols]="columns"> </app-movie-card>

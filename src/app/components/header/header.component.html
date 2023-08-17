@@ -1,10 +1,15 @@
 <mat-toolbar
-  class="mx-auto border-x justify-between border-b-[1px] border-[#001f3d]"
+  class="mx-auto border-x justify-between border-b-[2px] border-[#001f3d] sticky top-0 z-10 opacity-0.8"
   style="background-color: #050a30; color: #fff"
 >
-  <a routerLink="home" class="text-xl font-semibold">Movies app</a>
+  <div class="flex justify-center items-center gap-1">
+    <mat-icon>movie</mat-icon>
+    <a routerLink="home" class="text-xl font-semibold no-underline"
+      >Movie App</a
+    >
+  </div>
   <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>shopping_cart</mat-icon>
+    <mat-icon color="primary">favorite </mat-icon>
   </button>
 
   <mat-menu #menu="matMenu">

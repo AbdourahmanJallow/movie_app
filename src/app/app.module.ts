@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RatingModule } from 'ngx-bootstrap/rating';
+import { RatingModule, RatingConfig } from 'ngx-bootstrap/rating';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +29,7 @@ import { CategoriesComponent } from './pages/home/components/categories/categori
 import { MoviesHeaderComponent } from './pages/home/components/movies-header/movies-header.component';
 import { MovieCardComponent } from './pages/home/components/movie-card/movie-card.component';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
+import { HomeSkeletonComponent } from './components/loaders/home-skeleton/home-skeleton.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
     MoviesHeaderComponent,
     MovieCardComponent,
     MovieDetailsComponent,
+    HomeSkeletonComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,10 +61,22 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
     MatSnackBarModule,
     MatTooltipModule,
     HttpClientModule,
-    NgxSkeletonLoaderModule,
+    NgxSkeletonLoaderModule.forRoot({
+      theme: {
+        // Enabliong theme combination
+        extendsFromRoot: true,
+        // ... list of CSS theme attributes
+        // height: '100p',
+        // width: `100px`,
+        background: '#001f3d',
+      },
+      animation: 'pulse',
+      loadingText: 'Content is loading',
+    }),
+    // { animation: 'pulse', loadingText: 'This item is actually loading...' }
     RatingModule.forRoot(),
   ],
-  providers: [],
+  providers: [RatingConfig],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

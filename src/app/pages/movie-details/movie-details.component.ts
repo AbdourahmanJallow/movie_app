@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import {
   MovieDetails,
   ProductionCompany,
@@ -8,6 +8,7 @@ import { Movie } from 'src/app/models/movies.model';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Subscription } from 'rxjs';
 import { RatingConfig } from 'ngx-bootstrap/rating';
+import { Location } from '@angular/common';
 
 // such override allows to keep some initial values
 export function getRatingConfig(): RatingConfig {
@@ -40,23 +41,41 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private movieService: MoviesService
-  ) {}
+    private movieService: MoviesService,
+    private changeDetector: ChangeDetectorRef,
+    private router: Router,
+    private location: Location
+  ) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+      }
+    });
+  }
 
   ngOnInit() {
+    // window.scrollTo(0, 0);
     this.isLoading = true;
     this.movieIdSubscription = this.activatedRoute.params.subscribe(
-      (params) => (this.movieId = params['id'])
-    );
+      (params) => {
+        this.movieId = params['id'];
 
-    this.movieSubscription = this.movieService
-      .getMovieDetails(this.movieId)
-      .subscribe((data) => {
-        this.movieDetails = data;
-        this.productionCompanies = data?.production_companies;
-        console.log(data);
-        this.isLoading = false;
-      });
+        this.movieService.getMovieDetails(this.movieId).subscribe((data) => {
+          this.movieDetails = data;
+          this.productionCompanies = data?.production_companies;
+          console.log(data);
+
+          this.movieService
+            .getSimilarMovies(this.movieId)
+            .subscribe((response) => {
+              console.log(response.results);
+              this.similarMovies = response?.results.slice(0, 12);
+            });
+
+          this.isLoading = false;
+        });
+      }
+    );
 
     this.similarMoviesSubscription = this.movieService
       .getSimilarMovies(this.movieId)
@@ -83,4 +102,26 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return parts.join('.');
   }
+
+  toPreviousPage(): void {
+    // this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+    this.location.back();
+  }
+
+  // getMoviesInfo(movie_id: number | undefined): void {
+  //   this.movieService.getMovieDetails(movie_id).subscribe((data) => {
+  //     this.movieDetails = data;
+  //     this.productionCompanies = data?.production_companies;
+  //     console.log(data);
+
+  //     this.movieService.getSimilarMovies(movie_id).subscribe((response) => {
+  //       console.log(response.results);
+  //       this.similarMovies = response?.results.slice(0, 12);
+  //     });
+  //   });
+  // }
+
+  public avatarUrl =
+    'https://www.telerik.com/kendo-react-ui-develop/components/images/user-avatar.jpeg';
+  public description = 'Having so much fun in Prague! #NaZdravi';
 }

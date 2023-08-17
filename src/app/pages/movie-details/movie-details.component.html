@@ -1,13 +1,56 @@
 <div class="bg-[#050a30] min-h-screen text-white">
   <div class="container mx-auto max-w-6xl p-4 flex flex-col">
-    <ng-container *ngIf="isLoading"> loading.... </ng-container>
+    <div *ngIf="isLoading">
+      <ngx-skeleton-loader
+        [theme]="{ height: '50px' }"
+        count="1"
+        appearance="line"
+      >
+      </ngx-skeleton-loader>
+      <ngx-skeleton-loader
+        [theme]="{
+          background: '#001f3d',
+          height: '30rem',
+          width: '33%',
+          marginRight: '3px'
+        }"
+        count="1"
+        appearance="custom-content"
+      >
+      </ngx-skeleton-loader>
+      <ngx-skeleton-loader
+        [theme]="{ height: '30rem',
+        width: '64.5%',}"
+        count="1"
+        appearance="custom-content"
+        class="ml-4"
+      >
+      </ngx-skeleton-loader>
+      <ng-container *ngFor="let i of [1, 2, 3, 4, 5, 6]">
+        <ngx-skeleton-loader
+          [theme]="{ height: '15rem',
+          width: '10rem',}"
+          appearance="custom-content"
+          class="mr-4"
+        >
+        </ngx-skeleton-loader>
+      </ng-container>
+    </div>
 
     <ng-container *ngIf="!isLoading && movieDetails" class="p-4">
-      <h1 class="text-2xl font-extralight from-stone-300">
-        {{ movieDetails.title }}
-      </h1>
+      <header class="flex justify-start items-center">
+        <a
+          class="mr-2 cursor-pointer flex justify-center"
+          (click)="toPreviousPage()"
+        >
+          <mat-icon mat-icon-button> arrow_back </mat-icon>
+        </a>
+        <h1 class="text-2xl font-extralight from-stone-300">
+          {{ movieDetails.title }}
+        </h1>
+      </header>
       <div class="mt-4 w-full grid grid-cols-3 gap-4">
-        <div class="rounded-sm border-2 border-e-red-200">
+        <div class="rounded-sm border-[1px] border-e-red-100">
           <img
             class="h-[65vh] min-w-full object-center rounded-sm"
             [src]="baseImagePath + movieDetails.poster_path"
@@ -48,16 +91,23 @@
             <span class="text-gray-500 text-lg"> Rating: </span>
 
             <rating
-              style="color: #32cd30; font-size: 25px"
-              (ngModel)="(rate)"
+              (ngModel)="(4)"
               [max]="max"
               [readonly]="isReadonly"
+              style="color: yellow; font-size: 25px"
             ></rating>
           </p>
-          <div class="flex justify-center mt-6 divide-x divide-[#001f3d]">
-            <ng-container
+          <mat-grid-list
+            class="flex justify-center mt-6 divide-x divide-[#001f3d] max-w-full min-h-fit"
+            [cols]="productionCompanies?.length"
+            rowHeight="100px"
+            gutterSize="10px"
+            [style.background]=""
+          >
+            <mat-grid-tile
               *ngFor="let company of productionCompanies"
-              class="flex flex-row justify-center items-center"
+              class="grid grid-rows-2 place-content-center items-center p-2"
+              [ngClass]=""
             >
               <div
                 class="flex flex-col justify-center items-center text-center mr-2 p-2"
@@ -72,20 +122,20 @@
                   [alt]="company.name"
                 />
 
-                <span class="text-sm truncate text-[#32cd30] mt-2">
+                <p class="text-sm truncate text-gray-300 mt-2">
                   {{ company.name }}
-                </span>
+                </p>
               </div>
-            </ng-container>
-          </div>
+            </mat-grid-tile>
+          </mat-grid-list>
         </div>
       </div>
     </ng-container>
 
-    <ng-container *ngIf="similarMovies">
-      <div class="mt-16 p-2">
+    <ng-container *ngIf="!isLoading && similarMovies">
+      <div class="mt-16 py-2">
         <h3 class="text-sm font-extralight">People also search for</h3>
-        <div class="grid grid-cols-6 gap-8 mt-2 p-1">
+        <div class="grid grid-cols-6 gap-8 mt-2">
           <ng-container *ngFor="let movie of similarMovies">
             <app-movie-card [movie]="movie"> </app-movie-card>
           </ng-container>
