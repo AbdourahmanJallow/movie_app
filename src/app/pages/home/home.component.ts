@@ -5,15 +5,15 @@ import { Movie } from 'src/app/models/movies.model';
 import { TrendingMovies } from 'src/app/models/movies.model';
 
 const ROW_HEIGHTS: { [id: number]: number } = {
-  4: 400,
-  6: 335,
-  8: 350,
+  1: 400,
+  5: 335,
+  6: 350,
 };
 
 const GUTTER_SIZE: { [id: number]: string } = {
-  4: '20',
-  6: '12',
-  8: '10',
+  1: '20',
+  4: '12',
+  5: '10',
 };
 @Component({
   selector: 'app-home',
@@ -22,7 +22,7 @@ const GUTTER_SIZE: { [id: number]: string } = {
 export class HomeComponent implements OnInit, OnDestroy {
   public filterBy: string = 'popular';
   public showCount = 12;
-  public columns: number = 6;
+  public columns: number = 5;
   public rowHeight: number = ROW_HEIGHTS[this.columns];
   public gutterSize: string = GUTTER_SIZE[this.columns];
   public data: TrendingMovies | undefined;

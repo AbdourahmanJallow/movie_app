@@ -6,7 +6,7 @@
     [matTooltip]="movie.overview"
     matTooltipPosition="right"
     style="border-radius: 10px"
-    [ngClass]="{ 'w-60': numOfCols === 4 }"
+    [ngClass]="{ 'w-56': numOfCols === 5, 'w-64': numOfCols === 1 }"
   >
     <div class="flex flex-col">
       <img

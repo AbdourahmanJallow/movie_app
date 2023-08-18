@@ -48,6 +48,7 @@
         <h1 class="text-2xl font-extralight from-stone-300">
           {{ movieDetails.title }}
         </h1>
+        <span class="text-amber-400 ml-2 text-center">official trailer</span>
       </header>
       <div class="mt-4 w-full grid grid-cols-3 gap-4">
         <!-- <div class="rounded-sm border-e-red-100 col-span-2" *ngIf="videos"> -->
@@ -63,6 +64,7 @@
           class="col-span-2"
           *ngIf="videos"
           [videoId]="videoId ? videoId : videos[0].key"
+          [startSeconds]="0"
         >
         </youtube-player>
 

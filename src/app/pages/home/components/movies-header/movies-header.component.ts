@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class MoviesHeaderComponent implements OnInit {
   public movieType: string = 'popular';
   public count: number = 12;
-  public numOfCols: number = 6;
+  public numOfCols: number = 5;
   public search = '';
 
   public buttons: Array<{ name: string; value: string }> = [
