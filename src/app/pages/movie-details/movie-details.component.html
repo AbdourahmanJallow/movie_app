@@ -39,25 +39,36 @@
 
     <ng-container *ngIf="!isLoading && movieDetails" class="p-4">
       <header class="flex justify-start items-center">
-        <a
+        <button
           class="mr-2 cursor-pointer flex justify-center"
           (click)="toPreviousPage()"
         >
           <mat-icon mat-icon-button> arrow_back </mat-icon>
-        </a>
+        </button>
         <h1 class="text-2xl font-extralight from-stone-300">
           {{ movieDetails.title }}
         </h1>
       </header>
       <div class="mt-4 w-full grid grid-cols-3 gap-4">
-        <div class="rounded-sm border-[1px] border-e-red-100">
-          <img
+        <!-- <div class="rounded-sm border-e-red-100 col-span-2" *ngIf="videos"> -->
+        <!-- <img
             class="h-[65vh] min-w-full object-center rounded-sm"
             [src]="baseImagePath + movieDetails.poster_path"
             [alt]="movieDetails.title + 'image'"
-          />
-        </div>
-        <div class="text-[#f4f4f4] text-sm font-extralight col-span-2">
+          /> -->
+
+        <youtube-player
+          [width]="900"
+          [height]="530"
+          class="col-span-2"
+          *ngIf="videos"
+          [videoId]="videoId ? videoId : videos[0].key"
+        >
+        </youtube-player>
+
+        <!-- </div> -->
+        <!-- </div> -->
+        <div class="text-[#f4f4f4] text-sm font-extralight">
           <p>
             <span class="text-gray-500 text-lg"> Overview: </span>
             {{ movieDetails.overview }}
@@ -110,6 +121,7 @@
               [ngClass]=""
             >
               <div
+                *ngIf="company.logo_path"
                 class="flex flex-col justify-center items-center text-center mr-2 p-2"
               >
                 <img

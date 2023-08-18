@@ -7,6 +7,7 @@ import {
   NowPlayingOrUpcoming,
 } from '../models/movies.model';
 import { MovieDetails } from 'src/app/models/movieDetails.model';
+import { VideoDetails, Videos } from '../models/videoDetails.model';
 import { environment } from 'src/environments/environment';
 
 const apiUrl = environment.BASE_API_URL;
@@ -57,5 +58,11 @@ export class MoviesService {
     return this.http.get<TrendingMovies>(
       `${apiUrl}/search/movie?query=${movieName}&&api_key=${apiKey}`
     );
+  }
+
+  getMovieVideos(movie_id: any): Observable<Videos> {
+    return this.http
+      .get<Videos>(`${apiUrl}/movie/${movie_id}/videos?api_key=${apiKey}
+`);
   }
 }

@@ -6,14 +6,19 @@ import {
 } from 'src/app/models/movieDetails.model';
 import { Movie } from 'src/app/models/movies.model';
 import { MoviesService } from 'src/app/services/movies.service';
+import { VideoDetails } from 'src/app/models/videoDetails.model';
 import { Subscription } from 'rxjs';
 import { RatingConfig } from 'ngx-bootstrap/rating';
 import { Location } from '@angular/common';
+import { environment } from 'src/environments/environment';
+import { VgApiService } from '@videogular/ngx-videogular/core';
 
 // such override allows to keep some initial values
 export function getRatingConfig(): RatingConfig {
   return Object.assign(new RatingConfig(), { ariaLabel: 'My Rating' });
 }
+
+let apiLoaded = false;
 
 @Component({
   selector: 'app-movie-details',
@@ -24,20 +29,25 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   max = 5;
   rate = 3;
   isReadonly = true;
+  youtubeUrl = environment.YOUTUBE;
+  vimeoUrl = environment.VIMEO;
 
   public movieId: number | undefined;
   public movieDetails: MovieDetails | undefined;
   public similarMovies: Array<Movie> | undefined;
+  public videos: Array<VideoDetails> | undefined;
 
   public movieSubscription: Subscription | undefined;
   public movieIdSubscription: Subscription | undefined;
   public similarMoviesSubscription: Subscription | undefined;
+  public videosSubscription: Subscription | undefined;
 
   public isLoading: boolean | undefined;
   public productionCompanies: Array<ProductionCompany> | undefined;
 
   public baseImagePath: string = 'https://image.tmdb.org/t/p/w500';
   public noLogo = 'https://placehold.co/150?text=No+Logo';
+  public videoId = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -54,11 +64,26 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // window.scrollTo(0, 0);
+    if (!apiLoaded) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.body.appendChild(tag);
+      apiLoaded = true;
+    }
+
     this.isLoading = true;
+
     this.movieIdSubscription = this.activatedRoute.params.subscribe(
       (params) => {
         this.movieId = params['id'];
+
+        this.videosSubscription = this.movieService
+          .getMovieVideos(this.movieId)
+          .subscribe((data) => {
+            this.videos = data?.results;
+            console.log(data.results);
+            this.findOfficialTrailer();
+          });
 
         this.movieService.getMovieDetails(this.movieId).subscribe((data) => {
           this.movieDetails = data;
@@ -95,6 +120,9 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     if (this.similarMoviesSubscription) {
       this.similarMoviesSubscription.unsubscribe();
     }
+    if (this.videosSubscription) {
+      this.videosSubscription.unsubscribe();
+    }
   }
 
   numberWithCommas(x: string): string {
@@ -120,6 +148,33 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   //     });
   //   });
   // }
+
+  api: VgApiService = new VgApiService();
+
+  onPlayerInit(source: VgApiService): void {
+    this.api = source;
+    console.log('OnPlayerInit');
+
+    this.api
+      .getDefaultMedia()
+      .subscriptions.loadedMetadata.subscribe(this.autoplay.bind(this));
+  }
+
+  autoplay(): void {
+    console.log('playing');
+    this.api.play();
+  }
+
+  findOfficialTrailer() {
+    const officialTrailer = this.videos?.find(
+      (video) => video.name === 'Official Trailer'
+    );
+
+    console.log(officialTrailer);
+    if (officialTrailer) {
+      this.videoId = officialTrailer.key;
+    }
+  }
 
   public avatarUrl =
     'https://www.telerik.com/kendo-react-ui-develop/components/images/user-avatar.jpeg';

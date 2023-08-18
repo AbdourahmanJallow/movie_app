@@ -63,7 +63,6 @@
       </ng-container>
     </div>
 
-    <!-- <ng-container *ngIf="" class="p-4"> -->
     <header
       *ngIf="!isLoading && movieResults"
       class="flex justify-start items-center"
@@ -84,14 +83,14 @@
 
     <ng-container *ngIf="!isLoading && movieResults">
       <div class="mt-8 py-2">
-        <!-- <h3 class="text-sm font-extralight">People also search for</h3> -->
-        <div class="grid grid-cols-1 md:grid-cols-6 sm:grid-cols-4 gap-8 mt-2">
+        <div
+          class="grid grid-cols-1 gap-16 sm:grid-cols-4 md:grid-cols-6 sm:gap-8 mt-2"
+        >
           <ng-container *ngFor="let movie of movieResults">
             <app-movie-card [movie]="movie"> </app-movie-card>
           </ng-container>
         </div>
       </div>
     </ng-container>
-    <!-- </div> -->
   </div>
 </section>

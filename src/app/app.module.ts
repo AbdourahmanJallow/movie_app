@@ -36,6 +36,12 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
 import { HomeSkeletonComponent } from './components/loaders/home-skeleton/home-skeleton.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 
+import { VgCoreModule } from '@videogular/ngx-videogular/core';
+import { VgControlsModule } from '@videogular/ngx-videogular/controls';
+import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
+import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,6 +91,11 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
     }),
     // { animation: 'pulse', loadingText: 'This item is actually loading...' }
     RatingModule.forRoot(),
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
+    YouTubePlayerModule,
   ],
   providers: [RatingConfig],
   bootstrap: [AppComponent],
