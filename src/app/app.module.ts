@@ -20,6 +20,10 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
 
 import { HeaderComponent } from './components/header/header.component';
@@ -30,6 +34,7 @@ import { MoviesHeaderComponent } from './pages/home/components/movies-header/mov
 import { MovieCardComponent } from './pages/home/components/movie-card/movie-card.component';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 import { HomeSkeletonComponent } from './components/loaders/home-skeleton/home-skeleton.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +47,7 @@ import { HomeSkeletonComponent } from './components/loaders/home-skeleton/home-s
     MovieCardComponent,
     MovieDetailsComponent,
     HomeSkeletonComponent,
+    SearchPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +66,10 @@ import { HomeSkeletonComponent } from './components/loaders/home-skeleton/home-s
     MatBadgeModule,
     MatSnackBarModule,
     MatTooltipModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    NgIf,
     HttpClientModule,
     NgxSkeletonLoaderModule.forRoot({
       theme: {

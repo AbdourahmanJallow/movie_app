@@ -1,0 +1,97 @@
+<section class="bg-[#050a30] min-h-screen text-white">
+  <div class="container mx-auto max-w-6xl p-4 flex flex-col">
+    <!-- <div *ngIf="isLoading"> -->
+    <!-- <ngx-skeleton-loader
+        [theme]="{ height: '50px' }"
+        count="1"
+        appearance="line"
+      >
+      </ngx-skeleton-loader>
+      <ngx-skeleton-loader
+        [theme]="{
+          background: '#001f3d',
+          height: '30rem',
+          width: '33%',
+          marginRight: '3px'
+        }"
+        count="1"
+        appearance="custom-content"
+      >
+      </ngx-skeleton-loader>
+      <ngx-skeleton-loader
+        [theme]="{ height: '30rem',
+        width: '64.5%',}"
+        count="1"
+        appearance="custom-content"
+        class="ml-4"
+      >
+      </ngx-skeleton-loader>
+    </div> -->
+    <div *ngIf="isLoading">
+      <ngx-skeleton-loader
+        [theme]="{ height: '50px' }"
+        count="1"
+        appearance="line"
+      >
+      </ngx-skeleton-loader>
+      <ng-container *ngFor="let i of [1, 2, 3, 4, 5, 6]">
+        <ngx-skeleton-loader
+          [theme]="{ height: '15rem',
+            width: '10rem',}"
+          appearance="custom-content"
+          class="mr-4"
+        >
+        </ngx-skeleton-loader>
+      </ng-container>
+      <ng-container *ngFor="let i of [1, 2, 3, 4, 5, 6]">
+        <ngx-skeleton-loader
+          [theme]="{ height: '15rem',
+            width: '10rem',}"
+          appearance="custom-content"
+          class="mr-4"
+        >
+        </ngx-skeleton-loader>
+      </ng-container>
+      <ng-container *ngFor="let i of [1, 2, 3, 4, 5, 6]">
+        <ngx-skeleton-loader
+          [theme]="{ height: '15rem',
+            width: '10rem',}"
+          appearance="custom-content"
+          class="mr-4"
+        >
+        </ngx-skeleton-loader>
+      </ng-container>
+    </div>
+
+    <!-- <ng-container *ngIf="" class="p-4"> -->
+    <header
+      *ngIf="!isLoading && movieResults"
+      class="flex justify-start items-center"
+    >
+      <button
+        class="mr-2 cursor-pointer flex justify-center"
+        (click)="toPreviousPage()"
+      >
+        <mat-icon mat-icon-button> arrow_back </mat-icon>
+      </button>
+      <h1 class="text-2xl font-extralight from-stone-300">
+        Search Results for
+        <span class="text-red-500 font-semibold">
+          {{ searchValue }}
+        </span>
+      </h1>
+    </header>
+
+    <ng-container *ngIf="!isLoading && movieResults">
+      <div class="mt-8 py-2">
+        <!-- <h3 class="text-sm font-extralight">People also search for</h3> -->
+        <div class="grid grid-cols-1 md:grid-cols-6 sm:grid-cols-4 gap-8 mt-2">
+          <ng-container *ngFor="let movie of movieResults">
+            <app-movie-card [movie]="movie"> </app-movie-card>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+    <!-- </div> -->
+  </div>
+</section>

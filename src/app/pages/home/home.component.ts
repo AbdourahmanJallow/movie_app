@@ -63,4 +63,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   onUpdateColumns(cols: number): void {
     this.columns = cols;
   }
+
+  onMovieSearch(search: string): void {}
 }

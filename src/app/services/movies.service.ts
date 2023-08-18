@@ -52,4 +52,10 @@ export class MoviesService {
       .get<TrendingMovies>(`${apiUrl}/movie/${movie_id}/similar?api_key=${apiKey}
 `);
   }
+
+  searchMovieByName(movieName: string): Observable<TrendingMovies> {
+    return this.http.get<TrendingMovies>(
+      `${apiUrl}/search/movie?query=${movieName}&&api_key=${apiKey}`
+    );
+  }
 }
