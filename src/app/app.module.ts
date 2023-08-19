@@ -28,7 +28,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
-import { CartComponent } from './pages/cart/cart.component';
 import { CategoriesComponent } from './pages/home/components/categories/categories.component';
 import { MoviesHeaderComponent } from './pages/home/components/movies-header/movies-header.component';
 import { MovieCardComponent } from './pages/home/components/movie-card/movie-card.component';
@@ -41,19 +40,20 @@ import { VgControlsModule } from '@videogular/ngx-videogular/controls';
 import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { FavoritesComponent } from './pages/favorites/favorites.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    CartComponent,
     CategoriesComponent,
     MoviesHeaderComponent,
     MovieCardComponent,
     MovieDetailsComponent,
     HomeSkeletonComponent,
     SearchPageComponent,
+    FavoritesComponent,
   ],
   imports: [
     BrowserModule,

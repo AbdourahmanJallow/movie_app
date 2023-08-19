@@ -1,37 +1,56 @@
-<button [routerLink]="['/movie-details', movie?.id]" class="">
-  <mat-card
-    *ngIf="movie"
-    class="w-44 h-72 group relative bg-[#001f3d] flex flex-col"
-    #tooltip="matTooltip"
-    [matTooltip]="movie.overview"
-    aria-label="Tooltip"
-    matTooltipPosition="right"
-    matTooltipClass="mat-tooltip"
-    style="border-radius: 10px"
-    [ngClass]="{ 'w-56': numOfCols === 5, 'w-64': numOfCols === 1 }"
-  >
+<mat-card
+  *ngIf="movie"
+  class="w-48 sm:w-56 h-72 group relative bg-[#001f3d] flex flex-col"
+  style="border-radius: 10px"
+  [ngClass]="{ 'w-56': numOfCols === 5, 'w-64': numOfCols === 1 }"
+>
+  <button [routerLink]="['/movie-details', movie.id]" class="">
     <img
       mat-card-image
       [src]="baseImagePath + movie.poster_path"
       alt="image"
+      #tooltip="matTooltip"
+      [matTooltip]="movie.overview"
+      aria-label="Tooltip"
+      matTooltipPosition="right"
+      matTooltipClass="mat-tooltip"
       class="mx-auto h-[260px] w-full"
       style="border-top-left-radius: 5px; border-top-right-radius: 5px"
     />
-    <div
-      class="h-full flex justify-between w-full py-2 px-1 items-center bg-[#001f3d] text-[#fff] rounded-b-md"
-    >
-      <div
-        class="max-w-[3/4] text-[.65rem] text-[#fff] truncate hover:whitespace-normal"
-      >
-        <span class="text-left">
-          {{ movie.title }}
-        </span>
-      </div>
-      <div>
-        <span class="font-light">{{
-          movie.release_date.toString().substring(0, 4)
-        }}</span>
-      </div>
+  </button>
+
+  <div
+    class="h-full w-ful flex flex-col justify-start l py-2 px-1 items-start bg-[#001f3d] text-[#888] text-[.65rem] rounded-b-md"
+  >
+    <div class="truncate hover:whitespace-normal mb-2">
+      {{ movie.title }}
     </div>
-  </mat-card>
-</button>
+    <div class="flex justify-between items-center w-full">
+      <div class="font-light">
+        {{ movie.release_date.toString().substring(0, 4) }}
+      </div>
+
+      <button
+        *ngIf="isMovieSaved(movie)"
+        (click)="removeMovie(movie)"
+        mat-icon-button
+        #tooltip="matTooltip"
+        matTooltip="Save movie"
+        matTooltipPosition="below"
+      >
+        <mat-icon class="text-green-400">turned_in</mat-icon>
+      </button>
+      <button
+        *ngIf="!isMovieSaved(movie)"
+        class
+        (click)="saveMovie(movie)"
+        mat-icon-button
+        #tooltip="matTooltip"
+        matTooltip="Remove movie"
+        matTooltipPosition="below"
+      >
+        <mat-icon class="text-[#f4f4f4]">turned_in</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card>

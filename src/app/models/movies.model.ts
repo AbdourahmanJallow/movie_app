@@ -6,6 +6,10 @@ export interface TrendingMovies {
   total_results: number;
 }
 
+export interface FavoriteMovies {
+  savedMovies: Array<Movie>;
+}
+
 // interface for now_playing and upcoming movies
 export interface NowPlayingOrUpcoming {
   dates: Dates;

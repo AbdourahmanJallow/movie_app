@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CartComponent } from './cart.component';
+import { FavoritesComponent } from './favorites.component';
 
-describe('CartComponent', () => {
-  let component: CartComponent;
-  let fixture: ComponentFixture<CartComponent>;
+describe('FavoritesComponent', () => {
+  let component: FavoritesComponent;
+  let fixture: ComponentFixture<FavoritesComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CartComponent]
+      declarations: [FavoritesComponent]
     });
-    fixture = TestBed.createComponent(CartComponent);
+    fixture = TestBed.createComponent(FavoritesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

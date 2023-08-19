@@ -1,5 +1,5 @@
 <section class="bg-[#050a30] min-h-screen text-white">
-  <div class="container mx-auto max-w-6xl p-4 flex flex-col">
+  <div class="container mx-auto max-w-7xl p-4 flex flex-col">
     <div *ngIf="isLoading">
       <ngx-skeleton-loader
         [theme]="{ height: '50px' }"
@@ -59,9 +59,9 @@
           /> -->
 
         <youtube-player
+          class="md:col-span-2 max-w-fit"
           [width]="900"
-          [height]="530"
-          class="col-span-2"
+          [height]="550"
           *ngIf="videos"
           [videoId]="videoId ? videoId : videos[0].key"
           [startSeconds]="0"
@@ -70,7 +70,7 @@
 
         <!-- </div> -->
         <!-- </div> -->
-        <div class="text-[#f4f4f4] text-sm font-extralight">
+        <div class="text-[#f4f4f4] text-sm font-extralight max-w-fit">
           <p>
             <span class="text-gray-500 text-lg"> Overview: </span>
             {{ movieDetails.overview }}
@@ -150,7 +150,7 @@
       <div class="mt-16 py-2">
         <h3 class="text-sm font-extralight">People also search for</h3>
         <div
-          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-8 mt-2"
+          class="grid grid-cols-1 place-content-center place-items-center sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-8 md:gap-16 mt-2"
         >
           <ng-container *ngFor="let movie of similarMovies">
             <app-movie-card [movie]="movie"> </app-movie-card>
