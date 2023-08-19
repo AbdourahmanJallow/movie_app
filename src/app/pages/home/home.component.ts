@@ -6,7 +6,7 @@ import { TrendingMovies } from 'src/app/models/movies.model';
 
 const ROW_HEIGHTS: { [id: number]: number } = {
   1: 400,
-  5: 335,
+  5: 380,
   6: 350,
 };
 

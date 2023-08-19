@@ -12,6 +12,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-::ng-deep .mat-menu-panel {
+::ng-deep .custom {
   background-color: red; /* Replace with your desired color */
+}
+
+.mat-menu-panel .custom {
+  background-color: darkgrey;
+  border-radius: 0px;
 }

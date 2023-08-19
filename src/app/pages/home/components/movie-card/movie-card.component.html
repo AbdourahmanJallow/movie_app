@@ -1,36 +1,36 @@
-<button [routerLink]="['/movie-details', movie?.id]">
+<button [routerLink]="['/movie-details', movie?.id]" class="">
   <mat-card
     *ngIf="movie"
-    class="w-44 group relative"
+    class="w-44 h-72 group relative bg-[#001f3d] flex flex-col"
     #tooltip="matTooltip"
     [matTooltip]="movie.overview"
+    aria-label="Tooltip"
     matTooltipPosition="right"
+    matTooltipClass="mat-tooltip"
     style="border-radius: 10px"
     [ngClass]="{ 'w-56': numOfCols === 5, 'w-64': numOfCols === 1 }"
   >
-    <div class="flex flex-col">
-      <img
-        mat-card-image
-        [src]="baseImagePath + movie.poster_path"
-        alt="image"
-        class="mx-auto h-[260px] w-full"
-        style="border-top-left-radius: 5px; border-top-right-radius: 5px"
-      />
+    <img
+      mat-card-image
+      [src]="baseImagePath + movie.poster_path"
+      alt="image"
+      class="mx-auto h-[260px] w-full"
+      style="border-top-left-radius: 5px; border-top-right-radius: 5px"
+    />
+    <div
+      class="h-full flex justify-between w-full py-2 px-1 items-center bg-[#001f3d] text-[#fff] rounded-b-md"
+    >
       <div
-        class="flex justify-between w-full py-2 px-1 items-center bg-[#001f3d] text-[#fff] rounded-b-md"
+        class="max-w-[3/4] text-[.65rem] text-[#fff] truncate hover:whitespace-normal"
       >
-        <div
-          class="max-w-[3/4] text-[.65rem] text-[#fff] truncate hover:whitespace-normal"
-        >
-          <span class="text-left">
-            {{ movie.title }}
-          </span>
-        </div>
-        <div>
-          <span class="font-light">{{
-            movie.release_date.toString().substring(0, 4)
-          }}</span>
-        </div>
+        <span class="text-left">
+          {{ movie.title }}
+        </span>
+      </div>
+      <div>
+        <span class="font-light">{{
+          movie.release_date.toString().substring(0, 4)
+        }}</span>
       </div>
     </div>
   </mat-card>

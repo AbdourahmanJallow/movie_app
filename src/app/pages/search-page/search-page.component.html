@@ -84,7 +84,7 @@
     <ng-container *ngIf="!isLoading && movieResults">
       <div class="mt-8 py-2">
         <div
-          class="grid grid-cols-1 gap-16 sm:grid-cols-4 md:grid-cols-6 sm:gap-8 mt-2"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 sm:gap-4 gap-16 md:gap-8 mt-2"
         >
           <ng-container *ngFor="let movie of movieResults">
             <app-movie-card [movie]="movie"> </app-movie-card>

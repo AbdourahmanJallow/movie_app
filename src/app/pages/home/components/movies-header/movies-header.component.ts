@@ -1,4 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Router } from '@angular/router';
 
@@ -6,6 +12,7 @@ import { Router } from '@angular/router';
   selector: 'app-movies-header',
   templateUrl: './movies-header.component.html',
   styleUrls: ['./movies-header.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MoviesHeaderComponent implements OnInit {
   public movieType: string = 'popular';
