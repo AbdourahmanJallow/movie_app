@@ -14,33 +14,22 @@
   </button>
 
   <mat-menu #menu="matMenu">
-    <div class="p-3 divide-y divide-solid">
+    <div class="p-3 divide-y divide-solid" *ngIf="savedMovies">
       <div class="pb-2 flex justify-between">
-        <span class="mr-16">1 item(s)</span>
-        <a routerLink="cart" class="text-[#7EC8E3]">Saved movies</a>
+        <p class="mr-16">{{ savedMovies.length }} Movie(s)</p>
+        <a routerLink="favorites" class="text-[#7EC8E3] inline-block"
+          >See favorites</a
+        >
       </div>
 
-      <div class="py-2">
-        <div class="flex justify-between pb-2">
-          <span class="font-medium">Avengers</span>
-          <span>{{ 230 | currency }}</span>
+      <ng-container class="py-2" *ngFor="let movie of savedMovies">
+        <div class="truncate flex justify-between p-2 mb-2">
+          <span class="font-medium">
+            {{ movie.title }}
+          </span>
+          <span>{{ movie.release_date.toString().slice(0, 4) }}</span>
         </div>
-        <div class="flex justify-between pb-2">
-          <span class="font-medium">Mission Impossible</span>
-          <span>{{ 350 | currency }}</span>
-        </div>
-        <div class="flex justify-between pb-2">
-          <span class="font-medium">Men In Black</span>
-          <span>{{ 230 | currency }}</span>
-        </div>
-      </div>
-
-      <div class="py-2 flex justify-between">
-        <span class="font-semibold">Total</span>
-        <span>
-          {{ 940 | currency }}
-        </span>
-      </div>
+      </ng-container>
 
       <div class="py-3 flex justify-between">
         <button class="rounded-full w-9 h-9 bg-red-600">

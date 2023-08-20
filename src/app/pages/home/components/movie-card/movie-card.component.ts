@@ -29,7 +29,9 @@ export class MovieCardComponent implements OnInit, OnDestroy {
     this.favoritesService.saveMovie(movie);
   }
 
-  removeMovie(movie: Movie): void {}
+  removeMovie(movie: Movie): void {
+    this.favoritesService.removeMovie(movie);
+  }
 
   isMovieSaved(movie: Movie): boolean {
     const found = this.favorites?.find((_movie) => _movie.id === movie.id);
